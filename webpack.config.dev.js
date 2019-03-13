@@ -2,7 +2,7 @@ const webpack = require("webpack");
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
-process.env.NODE_NEV = "development";
+process.env.NODE_ENV = "development";
 
 module.exports = {
   mode: "development",
@@ -10,7 +10,7 @@ module.exports = {
   devtool: "cheap-module-source-map",
   entry: "./src/index",
   output: {
-    path: path.resourse(__dirname, "build"),
+    path: path.resolve(__dirname, "build"),
     publicPath: "/",
     filename: "bundle.js"
   },

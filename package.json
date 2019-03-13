@@ -54,8 +54,8 @@
     "node": ">=8"
   },
   "babel": {
-    "preset": [
-      "babel-preset-react-app"
+    "presets": [
+      "react-app"
     ]
   }
 }
