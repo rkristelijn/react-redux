@@ -12,7 +12,8 @@ class CoursePage extends React.Component {
   }
 
   handleChange(event) {
-    console.log("handleChange", event);
+    const course = { ...this.state.course, title: event.target.value };
+    this.setState({ course: course });
   }
 
   render() {
