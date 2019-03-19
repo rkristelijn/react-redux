@@ -13,7 +13,7 @@ class CoursePage extends React.Component {
 
   handleChange(event) {
     const course = { ...this.state.course, title: event.target.value };
-    this.setState({ course: course });
+    this.setState({ course });
   }
 
   render() {
