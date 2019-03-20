@@ -6,6 +6,7 @@ import PropTypes from "prop-types";
 
 function CoursesPage({ courses, authors, loadAuthors, loadCourses }) {
   useEffect(() => {
+    console.log("useEffect");
     if (courses.length === 0) {
       loadCourses().catch(error => {
         alert("Loading courses failed: " + error);
@@ -16,7 +17,7 @@ function CoursesPage({ courses, authors, loadAuthors, loadCourses }) {
         alert("Loading authors failed: " + error);
       });
     }
-  });
+  }, []); // The empty array as a second argument to effect means the effect will run only when it is not []
 
   return (
     <>
