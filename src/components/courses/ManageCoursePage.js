@@ -11,9 +11,9 @@ function ManageCoursesPage({
   authors,
   loadAuthors,
   loadCourses,
-  ...props
+  course: initialCourse
 }) {
-  const [course, setCourse] = useState({ ...props.course });
+  const [course, setCourse] = useState({ initialCourse });
   const [errors, setErrors] = useState({});
   useEffect(() => {
     console.log("useEffect");
