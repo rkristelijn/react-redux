@@ -11,7 +11,7 @@ export function loadCoursesSuccess(courses) {
 
 export function loadCourses() {
   return function(dispatch) {
-    console.log("courseActions");
+    console.log("calling courseActions API");
     return courseApi
       .getCourses()
       .then(courses => {

@@ -7,7 +7,7 @@ export function loadAuthorsSuccess(authors) {
 
 export function loadAuthors() {
   return function(dispatch) {
-    console.log("authorActions");
+    console.log("calling authorActions API");
     return authorApi
       .getAuthors()
       .then(authors => {

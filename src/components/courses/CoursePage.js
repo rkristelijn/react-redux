@@ -10,23 +10,25 @@ import CourseList from "./CourseList";
 //   CoursePage should be a container component, it is now displaying and adding courses
 class CoursesPage extends React.Component {
   componentDidMount() {
-    if (this.props.courses.length === 0) {
-      this.props.actions.loadCourses().catch(error => {
+    const { courses, authors, actions } = this.props;
+    if (courses.length === 0) {
+      actions.loadCourses().catch(error => {
         alert("Loading courses failed: " + error);
       });
     }
-    if (this.props.authors.length === 0) {
-      this.props.actions.loadAuthors().catch(error => {
+    if (authors.length === 0) {
+      actions.loadAuthors().catch(error => {
         alert("Loading authors failed: " + error);
       });
     }
   }
   render() {
+    const { courses } = this.props;
     console.log("CoursePage", "render", this.props);
     return (
       <>
         <h2>Courses</h2>
-        <CourseList courses={this.props.courses} />
+        <CourseList courses={courses} />
       </>
     );
   }
