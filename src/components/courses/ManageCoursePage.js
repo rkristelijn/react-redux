@@ -11,6 +11,7 @@ function ManageCoursePage({
   authors,
   loadAuthors,
   loadCourses,
+  saveCourse,
   ...props
 }) {
   const [course, setCourse] = useState({ ...props.course });
