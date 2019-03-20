@@ -1,10 +1,20 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { loadCourses } from "../../redux/actions/courseActions";
 import { loadAuthors } from "../../redux/actions/authorActions";
 import PropTypes from "prop-types";
+import CourseForm from "./CourseForm";
+import { newCourse } from "../../../tools/mockData";
 
-function CoursesPage({ courses, authors, loadAuthors, loadCourses }) {
+function ManageCoursesPage({
+  courses,
+  authors,
+  loadAuthors,
+  loadCourses,
+  ...props
+}) {
+  const [course, setCourse] = useState({ ...props.course });
+  const [errors, setErrors] = useState({});
   useEffect(() => {
     console.log("useEffect");
     if (courses.length === 0) {
@@ -19,14 +29,11 @@ function CoursesPage({ courses, authors, loadAuthors, loadCourses }) {
     }
   }, []); // The empty array as a second argument to effect means the effect will run only when it is not []
 
-  return (
-    <>
-      <h2>Manage Course</h2>
-    </>
-  );
+  return <CourseForm course={course} errors={errors} authors={authors} />;
 }
 
-CoursesPage.propTypes = {
+ManageCoursesPage.propTypes = {
+  course: PropTypes.object.isRequired,
   authors: PropTypes.array.isRequired,
   courses: PropTypes.array.isRequired,
   loadAuthors: PropTypes.func.isRequired,
@@ -36,6 +43,7 @@ CoursesPage.propTypes = {
 function mapStateToProps(state) {
   console.log("ManageCoursePage", "mapStateToProps", state);
   return {
+    course: newCourse,
     courses: state.courses,
     authors: state.authors
   };
@@ -49,4 +57,4 @@ const mapDispatchToProps = {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(CoursesPage);
+)(ManageCoursesPage);
