@@ -4,40 +4,23 @@ import * as courseActions from "../../redux/actions/courseActions";
 import PropTypes from "prop-types";
 import { bindActionCreators } from "redux";
 
+// Separation of concerns:
+//   CoursePage should be a container component, it is now displaying and adding cources
 class CoursePage extends React.Component {
-  state = {
-    course: {
-      title: ""
-    }
-  };
-
-  handleChange = event => {
-    const course = { ...this.state.course, title: event.target.value };
-    this.setState({ course });
-  };
-
-  handleSubmit = event => {
-    console.log("CoursePage", "handleSubmit", this.state);
-    event.preventDefault();
-    this.props.actions.createCourse(this.state.course);
-  };
-
+  componentDidMount() {
+    this.props.actions.loadCourses().catch(error => {
+      alert("Loading courses failed" + error);
+    });
+  }
   render() {
     console.log("CoursePage", "render", this.state);
     return (
-      <form onSubmit={this.handleSubmit}>
+      <>
         <h2>Courses</h2>
-        <h3>Add course</h3>
-        <input
-          type="text"
-          onChange={this.handleChange}
-          value={this.state.course.title}
-        />
-        <input type="submit" value="Save" />
         {this.props.courses.map(course => (
           <div key={course.title}>{course.title}</div>
         ))}
-      </form>
+      </>
     );
   }
 }

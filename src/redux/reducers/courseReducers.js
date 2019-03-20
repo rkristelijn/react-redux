@@ -17,6 +17,8 @@ export default function courseReducer(state = [], action) {
       // state.push(action.course) //!! not allowed to mutate the state.
       // - Instead return a copy of the state and the action
       return [...state, { ...action.course }];
+    case types.LOAD_COURSES_SUCCESS:
+      return action.courses;
     default:
       //if action is passed that this reducer doesn't know about, just pass along the state
       return state;
