@@ -1,5 +1,5 @@
 import * as types from "../actions/actionTypes";
-
+import initialState from "./initialState";
 // we pass courses as an array, you could also pass as an object, that is quicker
 // const ourCourses = [
 //    { id: 1, title: "Course 1" },
@@ -10,7 +10,7 @@ import * as types from "../actions/actionTypes";
 //   2: { id: 2, title: "Course 2" }
 // };
 // https://redux.js.org/recipes/structuring-reducers/normalizing-state-shape
-export default function courseReducer(state = [], action) {
+export default function courseReducer(state = initialState.courses, action) {
   switch (action.type) {
     case types.CREATE_COURSE:
       console.log("courseReducer", action);
