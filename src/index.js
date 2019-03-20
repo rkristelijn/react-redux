@@ -9,6 +9,8 @@ import { Provider as ReduxProvider } from "react-redux";
 
 const store = configureStore();
 
+store.subscribe(() => console.log("store Subscription", store.getState()));
+
 render(
   <ReduxProvider store={store}>
     <Router>

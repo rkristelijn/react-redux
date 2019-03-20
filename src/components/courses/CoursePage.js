@@ -57,7 +57,6 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   console.log("CoursePage", "mapDispatchToProps", courseActions);
   return {
-    //createCourse: course => dispatch(courseActions.createCourse(course))
     actions: bindActionCreators(courseActions, dispatch)
   };
 }
