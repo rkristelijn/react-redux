@@ -17,7 +17,7 @@ function ManageCoursePage({
   ...props
 }) {
   const [course, setCourse] = useState({ ...props.course });
-  const [errors, setErrors] = useState({}); // eslint-disable-line no-unused-vars
+  const [errors, setErrors] = useState({});
   const [saving, setSaving] = useState(false);
 
   useEffect(() => {
@@ -54,10 +54,16 @@ function ManageCoursePage({
     console.log("ManageCoursesPage", "handleSave", course);
     event.preventDefault();
     setSaving(true);
-    saveCourse(course).then(() => {
-      toast.success("Course saved.");
-      history.push("/courses");
-    });
+    saveCourse(course)
+      .then(() => {
+        toast.success("Course saved.");
+        history.push("/courses");
+      })
+      .catch(error => {
+        console.log("ManageCoursesPage", "handleChange;error", error);
+        setSaving(false);
+        setErrors({ onSave: error.message });
+      });
   }
 
   return (
