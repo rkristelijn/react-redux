@@ -5,6 +5,7 @@ import { loadAuthors } from "../../redux/actions/authorActions";
 import PropTypes from "prop-types";
 import CourseForm from "./CourseForm";
 import { newCourse } from "../../../tools/mockData";
+import { toast } from "react-toastify";
 
 function ManageCoursePage({
   courses,
@@ -17,6 +18,8 @@ function ManageCoursePage({
 }) {
   const [course, setCourse] = useState({ ...props.course });
   const [errors, setErrors] = useState({}); // eslint-disable-line no-unused-vars
+  const [saving, setSaving] = useState(false);
+
   useEffect(() => {
     console.log("ManageCoursesPage", "useEffect");
     if (courses.length === 0) {
@@ -50,7 +53,9 @@ function ManageCoursePage({
   function handleSave(event) {
     console.log("ManageCoursesPage", "handleSave", course);
     event.preventDefault();
+    setSaving(true);
     saveCourse(course).then(() => {
+      toast.success("Course saved.");
       history.push("/courses");
     });
   }
@@ -62,6 +67,7 @@ function ManageCoursePage({
       authors={authors}
       onChange={handleChange}
       onSave={handleSave}
+      saving={saving}
     />
   );
 }
