@@ -12,6 +12,7 @@ function ManageCoursePage({
   loadAuthors,
   loadCourses,
   saveCourse,
+  history, //every React Component using <Route> gets history passed in natively
   ...props
 }) {
   const [course, setCourse] = useState({ ...props.course });
@@ -42,7 +43,9 @@ function ManageCoursePage({
   function handleSave(event) {
     console.log("ManageCoursesPage", "handleSave", course);
     event.preventDefault();
-    saveCourse(course);
+    saveCourse(course).then(() => {
+      history.push("/courses");
+    });
   }
 
   return (
@@ -62,13 +65,21 @@ ManageCoursePage.propTypes = {
   courses: PropTypes.array.isRequired,
   loadAuthors: PropTypes.func.isRequired,
   loadCourses: PropTypes.func.isRequired,
-  saveCourse: PropTypes.func.isRequired
+  saveCourse: PropTypes.func.isRequired,
+  history: PropTypes.object.isRequired
 };
 
-function mapStateToProps(state) {
-  console.log("ManageCoursePage", "mapStateToProps", state);
+export function getCourseBySLug(courses, slug) {
+  return courses.find(course => course.slug === slug) || null;
+}
+
+function mapStateToProps(state, ownProps) {
+  console.log("ManageCoursePage", "mapStateToProps", state, ownProps);
+  const slug = ownProps.match.params.slug;
+  debugger;
+  const course = slug ? getCourseBySLug(state.courses, slug) : newCourse;
   return {
-    course: newCourse,
+    course,
     courses: state.courses,
     authors: state.authors
   };
