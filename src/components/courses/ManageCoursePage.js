@@ -16,7 +16,7 @@ function ManageCoursePage({
   ...props
 }) {
   const [course, setCourse] = useState({ ...props.course });
-  const [errors, setErrors] = useState({});
+  const [errors, setErrors] = useState({}); // eslint-disable-line no-unused-vars
   useEffect(() => {
     console.log("useEffect");
     if (courses.length === 0) {
@@ -69,15 +69,24 @@ ManageCoursePage.propTypes = {
   history: PropTypes.object.isRequired
 };
 
-export function getCourseBySLug(courses, slug) {
+export function getCourseBySlug(courses, slug) {
   return courses.find(course => course.slug === slug) || null;
+}
+
+function getSlug(ownProps) {
+  return (ownProps.location.pathname || [])
+    .split("/")
+    .slice(-1)
+    .pop();
 }
 
 function mapStateToProps(state, ownProps) {
   console.log("ManageCoursePage", "mapStateToProps", state, ownProps);
-  const slug = ownProps.match.params.slug;
-  debugger;
-  const course = slug ? getCourseBySLug(state.courses, slug) : newCourse;
+  const slug = getSlug(ownProps);
+  const course =
+    slug && state.courses.length > 0
+      ? getCourseBySlug(state.courses, slug)
+      : newCourse;
   return {
     course,
     courses: state.courses,
