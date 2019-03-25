@@ -18,11 +18,14 @@ function ManageCoursePage({
   const [course, setCourse] = useState({ ...props.course });
   const [errors, setErrors] = useState({}); // eslint-disable-line no-unused-vars
   useEffect(() => {
-    console.log("useEffect");
+    console.log("ManageCoursesPage", "useEffect");
     if (courses.length === 0) {
       loadCourses().catch(error => {
         alert("Loading courses failed: " + error);
       });
+    } else {
+      console.log("ManageCoursesPage", "useEffect", props.course);
+      setCourse({ ...props.course });
     }
     if (authors.length === 0) {
       loadAuthors().catch(error => {
