@@ -24,7 +24,11 @@ function ManageCoursePage({
         alert("Loading courses failed: " + error);
       });
     } else {
-      console.log("ManageCoursesPage", "useEffect", props.course);
+      console.log(
+        "ManageCoursesPage",
+        "setCourse when props.course change",
+        props.course
+      );
       setCourse({ ...props.course });
     }
     if (authors.length === 0) {
