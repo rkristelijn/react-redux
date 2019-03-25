@@ -28,7 +28,7 @@ function ManageCoursePage({
         alert("Loading authors failed: " + error);
       });
     }
-  }, [props.course]); // The empty array as a second argument to effect means the effect will run only when it is not []
+  }, [props.course]);
 
   function handleChange(event) {
     const { name, value } = event.target;
