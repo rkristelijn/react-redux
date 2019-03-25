@@ -24,7 +24,8 @@ export function loadCourses() {
         dispatch(loadCoursesSuccess(courses));
       })
       .catch(error => {
-        console.log("catching error");
+        console.log("courseActions error handling for load", error);
+        dispatch(apiCallError(error));
         throw error;
       });
   };
@@ -43,6 +44,7 @@ export function saveCourse(course) {
           : dispatch(createCourseSuccess(savedCourse));
       })
       .catch(error => {
+        console.log("courseActions error handling for save", error);
         dispatch(apiCallError(error));
         throw error;
       });
