@@ -2,7 +2,6 @@ import * as types from "../actions/actionTypes";
 import initialState from "./initialState";
 
 export default function courseReducer(state = initialState.courses, action) {
-  console.log("courseReducer", action);
   switch (action.type) {
     case types.CREATE_COURSE_SUCCESS:
       // just add the course to the courses

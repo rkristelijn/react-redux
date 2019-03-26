@@ -20,7 +20,6 @@ export function deleteCourseOptimistic(course) {
 
 export function loadCourses() {
   return function(dispatch) {
-    console.log("courseActions", "calling loadCourses API");
     dispatch(beginApiCall());
     return courseApi
       .getCourses()
@@ -28,7 +27,6 @@ export function loadCourses() {
         dispatch(loadCoursesSuccess(courses));
       })
       .catch(error => {
-        console.log("courseActions", "error handling for load", error);
         dispatch(apiCallError(error));
         throw error;
       });
@@ -37,18 +35,15 @@ export function loadCourses() {
 
 export function saveCourse(course) {
   return function(dispatch) {
-    console.log("courseActions", "calling saveCourse API");
     dispatch(beginApiCall());
     return courseApi
       .saveCourse(course)
       .then(savedCourse => {
-        console.log("courseActions", "savedCourse", course);
         course.id
           ? dispatch(updateCourseSuccess(savedCourse))
           : dispatch(createCourseSuccess(savedCourse));
       })
       .catch(error => {
-        console.log("courseActions", "error handling for save", error);
         dispatch(apiCallError(error));
         throw error;
       });
@@ -56,8 +51,6 @@ export function saveCourse(course) {
 }
 
 export function deleteCourse(course) {
-  console.log("courseActions", "calling deleteCourse API");
-
   return function(dispatch) {
     // Doing optimistic delete, so not dispatching begin/end api call
     // actions, or apiCallError action since we're not showing the loading status for this.
