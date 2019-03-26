@@ -68,3 +68,16 @@
 | webpack-bundle-analyzer         | Generate report of what's in the app's production bundle         |
 | webpack-cli                     | Run Webpack via the command line                                 |
 | webpack-dev-server              | Serve app via Webpack                                            |
+
+# Challenges
+
+1. Author administration (no delete if author still has courses)
+2. Filter course list
+3. Hide empty course list
+4. Unsaved changes message when leaving the page
+5. Enhance validation
+6. Handle 404 on edit course (tip: add some logic to mapStateToProps)
+7. Show # courses in Header
+8. Pagination
+9. Sort course table
+10. Revert abandoned changes
