@@ -30,7 +30,6 @@ it("should label save button as 'Save' when not saving", () => {
 });
 
 it("should label save button as 'Save' when not saving", () => {
-  const { getByText, debug } = renderCourseForm({ saving: true });
-  debug();
+  const { getByText } = renderCourseForm({ saving: true });
   getByText("Saving..."); //assertion build in
 });
