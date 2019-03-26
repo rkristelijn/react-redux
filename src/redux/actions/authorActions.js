@@ -8,7 +8,6 @@ export function loadAuthorsSuccess(authors) {
 
 export function loadAuthors() {
   return function(dispatch) {
-    console.log("calling authorActions API");
     dispatch(beginApiCall());
     return authorApi
       .getAuthors()
@@ -16,7 +15,6 @@ export function loadAuthors() {
         dispatch(loadAuthorsSuccess(authors));
       })
       .catch(error => {
-        console.log("authorActions error handling for save", error);
         dispatch(apiCallError(error));
         throw error;
       });

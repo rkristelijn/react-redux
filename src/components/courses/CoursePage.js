@@ -31,20 +31,14 @@ class CoursesPage extends React.Component {
   handleDeleteCourse = async course => {
     toast.success(`Course ${course.id} deleted`);
     try {
-      console.log("await: (a)waiting...");
       await this.props.actions.deleteCourse(course); //returns a promise
-      console.log("await: ... resolved");
     } catch (error) {
-      console.log("await: ... fail");
       toast.error("Delete failed:" + error.message, { autoClose: false });
-    } finally {
-      console.log("await: ... finally");
     }
   };
 
   render() {
     const { courses } = this.props;
-    console.log("CoursePage", "render", this.props);
     return (
       <>
         {this.state.redirectToAddCoursePage && <Redirect to="/course" />}
@@ -79,7 +73,6 @@ CoursesPage.propTypes = {
 };
 
 function mapStateToProps(state) {
-  console.log("CoursePage", "mapStateToProps", state);
   return {
     courses:
       state.authors.length === 0
@@ -96,7 +89,6 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  console.log("CoursePage", "mapDispatchToProps", courseActions, authorActions);
   return {
     actions: {
       loadCourses: bindActionCreators(courseActions.loadCourses, dispatch),
