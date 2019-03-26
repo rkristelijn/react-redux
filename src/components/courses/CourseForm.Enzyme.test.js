@@ -18,7 +18,18 @@ function renderCourseForm(args) {
 
 it("renders form and header", () => {
   const wrapper = renderCourseForm();
-  console.log(wrapper.debug()); //useful when expect doesn't match
   expect(wrapper.find("form").length).toBe(1);
   expect(wrapper.find("h2").text()).toBe("Add Course");
+});
+
+it("labels save buttons as 'Save' when not saving", () => {
+  const wrapper = renderCourseForm();
+  expect(wrapper.find("form").length).toBe(1);
+  expect(wrapper.find("button").text()).toBe("Save");
+});
+
+it("labels save buttons as 'Saving...' when not saving", () => {
+  const wrapper = renderCourseForm({ saving: true });
+  expect(wrapper.find("form").length).toBe(1);
+  expect(wrapper.find("button").text()).toBe("Saving...");
 });
