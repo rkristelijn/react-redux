@@ -7,13 +7,13 @@ import CourseForm from "./CourseForm";
 import { newCourse } from "../../../tools/mockData";
 import { toast } from "react-toastify";
 
-function ManageCoursePage({
+export function ManageCoursePage({
   courses,
   authors,
   loadAuthors,
   loadCourses,
   saveCourse,
-  history, //every React Component using <Route> gets history passed in natively
+  history,
   ...props
 }) {
   const [course, setCourse] = useState({ ...props.course });
@@ -21,17 +21,11 @@ function ManageCoursePage({
   const [saving, setSaving] = useState(false);
 
   useEffect(() => {
-    console.log("ManageCoursesPage", "useEffect");
     if (courses.length === 0) {
       loadCourses().catch(error => {
         alert("Loading courses failed: " + error);
       });
     } else {
-      console.log(
-        "ManageCoursesPage",
-        "setCourse when props.course change",
-        props.course
-      );
       setCourse({ ...props.course });
     }
     if (authors.length === 0) {
@@ -49,13 +43,11 @@ function ManageCoursePage({
     if (!category) errors.category = "Category is required.";
 
     setErrors(errors);
-    //Form is valid if the errors object still has no properties
     return Object.keys(errors).length === 0;
   }
 
   function handleChange(event) {
     const { name, value } = event.target;
-    console.log("ManageCoursesPage", "handleChange", name, value);
     setCourse(prevCourse => ({
       ...prevCourse,
       [name]: name === "authorId" ? parseInt(value, 10) : value
@@ -63,7 +55,6 @@ function ManageCoursePage({
   }
 
   function handleSave(event) {
-    console.log("ManageCoursesPage", "handleSave", course);
     event.preventDefault();
 
     if (!formIsValid()) {
@@ -77,7 +68,6 @@ function ManageCoursePage({
         history.push("/courses");
       })
       .catch(error => {
-        console.log("ManageCoursesPage", "handleChange;error", error);
         setSaving(false);
         setErrors({ onSave: error.message });
       });
@@ -117,7 +107,6 @@ function getSlug(ownProps) {
 }
 
 function mapStateToProps(state, ownProps) {
-  console.log("ManageCoursePage", "mapStateToProps", state, ownProps);
   const slug = getSlug(ownProps);
   const course =
     slug && state.courses.length > 0

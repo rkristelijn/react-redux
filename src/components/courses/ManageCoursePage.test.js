@@ -1,7 +1,7 @@
 import React from "react";
 import { mount } from "enzyme";
 import { authors, newCourse, courses } from "../../../tools/mockData";
-import ManageCoursePage from "./ManageCoursePage";
+import { ManageCoursePage } from "./ManageCoursePage";
 
 //centralized factory function to keep test simple
 function render(args) {
