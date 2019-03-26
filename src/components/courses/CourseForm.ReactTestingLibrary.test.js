@@ -1,6 +1,7 @@
 import React from "react";
 import { cleanup, render } from "react-testing-library";
 import CourseForm from "./CourseForm";
+import { debug } from "util";
 
 afterEach(cleanup);
 
@@ -29,6 +30,7 @@ it("should label save button as 'Save' when not saving", () => {
 });
 
 it("should label save button as 'Save' when not saving", () => {
-  const { getByText } = renderCourseForm({ saving: true });
+  const { getByText, debug } = renderCourseForm({ saving: true });
+  debug();
   getByText("Saving..."); //assertion build in
 });
